@@ -78,8 +78,17 @@ VALUES (1, gratuito, 0),
 (4, universitário, 5.99)
 ;
 
-INSERT INTO contracted_plan ()
-VALUES ()
+INSERT INTO contracted_plan (contracted_id, contracted_type, user_id, signature_date)
+VALUES (1, 1, 1, '2019-10-20'),
+(2, 3, 2, '2017-12-30'),
+(3, 4, 3, '2019-06-05'),
+(4, 2, 4, '2020-05-13'),
+(5, 2, 5, '2017-02-17'),
+(6, 3, 6, '2017-01-06'),
+(7, 4, 7, '2018-01-05'),
+(8, 4, 8, '2018-02-14'),
+(9, 3, 9, '2018-04-29'),
+(10, 3, 10, '2017-01-17'),
 ;
 
 INSERT INTO artists()
