@@ -38,16 +38,16 @@ CREATE TABLE following_artist (
 CREATE TABLE albums (
   album_id INT PRIMARY KEY AUTO_INCREMENT,
   album_name VARCHAR(100) NOT NULL,
-  artist INT,
+  artist_id INT NOT NULL,
   creation_date INT NOT NULL -- <=============================
-  FOREIGN KEY (artist) REFERENCES artists (artist_id)
+  FOREIGN KEY (artist_id) REFERENCES artists (artist_id)
 );
 
 CREATE TABLE songs (
   song_id INT PRIMARY KEY AUTO_INCREMENT,
   song_name VARCHAR(100) NOT NULL,
   duration INT NOT NULL,
-  album INT,
+  album_id INT,
 );
 
 CREATE TABLE playback_history (
@@ -101,10 +101,6 @@ VALUES (1, 'Walter Phoenix'),
 (6, 'Fog')
 ;
 
-    follow_id INT PRIMARY KEY AUTO_INCREMENT,
-  user_id INT NOT NULL,
-  artist_id INT NOT NULL,
-
 INSERT INTO following_artist (follow_id, user_id, artist_id, is_following)
 VALUES (1, 1, 1, 1),
 (2, 1, 4, 1),
@@ -130,11 +126,25 @@ VALUES (1, 1, 1, 1),
 (22, 10, 6, 1),
 ;
 
-INSERT INTO albums ()
-VALUES ()
+INSERT INTO albums (album_id, album_name, artist_id, creation_date)
+VALUES (1, 'Envious', 1, 1990),
+(2, 'Exuberant', 1, 1993),
+(3, 'Hallowed Steam', 2, 1995),
+(4, 'Incandescent', 3, 1998),
+(5, 'Temporary Culture', 4, 2001),
+(6, 'Library of liberty', 4, 2003),
+(7, 'Chained Down', 5, 2007),
+(8, 'Cabinet of fools', 5, 2012),
+(9, 'No guarantees', 5, 2015),
+(10, 'Apparatus', 6, 2015),
 ;
 
-INSERT INTO songs ()
+    song_id INT PRIMARY KEY AUTO_INCREMENT,
+  song_name VARCHAR(100) NOT NULL,
+  duration INT NOT NULL,
+  album
+
+INSERT INTO songs (song_id, song_name, duration, album_id)
 VALUES ()
 ;
 
