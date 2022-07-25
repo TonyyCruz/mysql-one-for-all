@@ -1,5 +1,7 @@
 CREATE DATABASE IF NOT EXISTS SpotifyClone;
 
+USE SpotifyClone;
+
 CREATE TABLE users (
   user_id INT PRIMARY KEY AUTO_INCREMENT,
   user_name VARCHAR(100) NOT NULL,
@@ -16,7 +18,7 @@ CREATE TABLE contracted_plan (
   contracted_id INT PRIMARY KEY AUTO_INCREMENT,
   contracted_type INT NOT NULL,
   user_id INT NOT NULL,
-  signature_date DATE DEFAULT CURDATE() -- <=============
+  signature_date DATE, -- <=============
   FOREIGN KEY (user_id) REFERENCES users (user_id),
     FOREIGN KEY (contracted_type) REFERENCES plans (plan_id)
 );
@@ -39,7 +41,7 @@ CREATE TABLE albums (
   album_id INT PRIMARY KEY AUTO_INCREMENT,
   album_name VARCHAR(100) NOT NULL,
   artist_id INT NOT NULL,
-  creation_date INT NOT NULL -- <=============================
+  creation_date INT NOT NULL, -- <=============================
   FOREIGN KEY (artist_id) REFERENCES artists (artist_id)
 );
 
@@ -54,29 +56,29 @@ CREATE TABLE playback_history (
   history_id INT PRIMARY KEY AUTO_INCREMENT,
   song_id INT NOT NULL,
   user_id INT NOT NULL,
-  reproduction_date DATE DEFAULT NOW(),
+  reproduction_date DATETIME,
 
   FOREIGN KEY (song_id) REFERENCES songs (song_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
 INSERT INTO users (user_id, user_name, years_old)
-VALUES (1, Thati, 23),
-(2, Cintia, 35),
-(3, Bill, 20),
-(4, Roger, 45),
-(5, Norman, 58),
-(6, Patrick, 33),
-(7, Vivian, 26),
-(8, Carol, 19),
-(9, Angelina, 42),
-(10, Paul, 46);
+VALUES (1, 'Thati', 23),
+(2, 'Cintia', 35),
+(3, 'Bill', 20),
+(4, 'Roger', 45),
+(5, 'Norman', 58),
+(6, 'Patrick', 33),
+(7, 'Vivian', 26),
+(8, 'Carol', 19),
+(9, 'Angelina', 42),
+(10, 'Paul', 46);
 
 INSERT INTO plans (plan_id, plan_type, plan_value)
-VALUES (1, gratuito, 0),
-(2, pessoal, 6.99),
-(3, familiar, 7.99),
-(4, universitário, 5.99);
+VALUES (1, 'gratuito', 0),
+(2, 'pessoal', 6.99),
+(3, 'familiar', 7.99),
+(4, 'universitário', 5.99);
 
 INSERT INTO contracted_plan (contracted_id, contracted_type, user_id, signature_date)
 VALUES (1, 1, 1, '2019-10-20'),
@@ -175,11 +177,6 @@ VALUES (1, 'Soul For Us', 200, 1),
 (38, "Wouldn't It Be Nice", 213, 10),
 (39, 'Baby', 136, 10),
 (40, 'You Make Me Feel So..', 83, 10);
-
-    history_id INT PRIMARY KEY AUTO_INCREMENT,
-  song_id INT NOT NULL,
-  user_id INT NOT NULL,
-  reproduction_date
 
 INSERT INTO playback_history (history_id, song_id, user_id, reproduction_date)
 VALUES (1, 36, 1, '2020-02-28 10:45:55'),
