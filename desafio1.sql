@@ -2,25 +2,27 @@ CREATE DATABASE IF NOT EXISTS SpotifyClone;
 
 USE SpotifyClone;
 
-CREATE TABLE users (
-  user_id INT PRIMARY KEY AUTO_INCREMENT,
-  user_name VARCHAR(100) NOT NULL,
-  years_old INT NOT NULL
-);
-
 CREATE TABLE plans (
   plan_id INT PRIMARY KEY AUTO_INCREMENT,
   plan_type VARCHAR(100) NOT NULL,
   plan_value DECIMAL(6, 2) NOT NULL
 );
 
-CREATE TABLE contracted_plan (
+CREATE TABLE users (
+  user_id INT PRIMARY KEY AUTO_INCREMENT,
+  user_name VARCHAR(100) NOT NULL,
+  years_old INT NOT NULL,
+  contracted_type INT NOT NULL,
+  FOREIGN KEY (contracted_type) REFERENCES plans (plan_id)
+);
+
+CREATE TABLE contracted_plan_history (
   contracted_id INT PRIMARY KEY AUTO_INCREMENT,
   contracted_type INT NOT NULL,
   user_id INT NOT NULL,
-  signature_date DATE, -- <=============
+  signature_date DATE,
   FOREIGN KEY (user_id) REFERENCES users (user_id),
-    FOREIGN KEY (contracted_type) REFERENCES plans (plan_id)
+  FOREIGN KEY (contracted_type) REFERENCES plans (plan_id)
 );
 
 CREATE TABLE artists (
@@ -32,7 +34,7 @@ CREATE TABLE following_artist (
   follow_id INT PRIMARY KEY AUTO_INCREMENT,
   user_id INT NOT NULL,
   artist_id INT NOT NULL,
-  is_following INT NOT NULL DEFAULT 1,
+  is_following TINYINT NOT NULL DEFAULT 1,
   FOREIGN KEY (user_id) REFERENCES users (user_id),
   FOREIGN KEY (artist_id) REFERENCES artists (artist_id)
 );
@@ -62,25 +64,25 @@ CREATE TABLE playback_history (
   FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
-INSERT INTO users (user_id, user_name, years_old)
-VALUES (1, 'Thati', 23),
-(2, 'Cintia', 35),
-(3, 'Bill', 20),
-(4, 'Roger', 45),
-(5, 'Norman', 58),
-(6, 'Patrick', 33),
-(7, 'Vivian', 26),
-(8, 'Carol', 19),
-(9, 'Angelina', 42),
-(10, 'Paul', 46);
-
 INSERT INTO plans (plan_id, plan_type, plan_value)
 VALUES (1, 'gratuito', 0),
 (2, 'pessoal', 6.99),
 (3, 'familiar', 7.99),
 (4, 'universitário', 5.99);
 
-INSERT INTO contracted_plan (contracted_id, contracted_type, user_id, signature_date)
+INSERT INTO users (user_id, user_name, years_old, contracted_type)
+VALUES (1, 'Thati', 23, 1),
+(2, 'Cintia', 35, 3),
+(3, 'Bill', 20, 4),
+(4, 'Roger', 45, 2),
+(5, 'Norman', 58, 2),
+(6, 'Patrick', 33, 3),
+(7, 'Vivian', 26, 4),
+(8, 'Carol', 19, 4),
+(9, 'Angelina', 42, 3),
+(10, 'Paul', 46, 3);
+
+INSERT INTO contracted_plan_history (contracted_id, contracted_type, user_id, signature_date)
 VALUES (1, 1, 1, '2019-10-20'),
 (2, 3, 2, '2017-12-30'),
 (3, 4, 3, '2019-06-05'),
