@@ -1,8 +1,8 @@
 {
   "coluna_usuario": "user_name",
   "tabela_que_contem_usuario": "users",
-  "coluna_plano": "contracted_type",
-  "tabela_que_contem_plano": "contracted_plan",
+  "coluna_plano": "plan_type",
+  "tabela_que_contem_plano": "plans",
   "coluna_historico_de_reproducoes": "reproduction_date",
   "tabela_que_contem_historico_de_reproducoes": "playback_histor",
   "coluna_seguindo_artistas": "artist_id",
