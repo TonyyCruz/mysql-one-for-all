@@ -12,17 +12,17 @@ CREATE TABLE users (
   user_id INT PRIMARY KEY AUTO_INCREMENT,
   user_name VARCHAR(100) NOT NULL,
   years_old INT NOT NULL,
-  contracted_type INT NOT NULL,
-  FOREIGN KEY (contracted_type) REFERENCES plans (plan_id)
+  plan_id INT NOT NULL,
+  FOREIGN KEY (plan_id) REFERENCES plans (plan_id)
 );
 
 CREATE TABLE contracted_plan_history (
   contracted_id INT PRIMARY KEY AUTO_INCREMENT,
-  contracted_type INT NOT NULL,
+  plan_id INT NOT NULL,
   user_id INT NOT NULL,
   signature_date DATE,
   FOREIGN KEY (user_id) REFERENCES users (user_id),
-  FOREIGN KEY (contracted_type) REFERENCES plans (plan_id)
+  FOREIGN KEY (plan_id) REFERENCES plans (plan_id)
 );
 
 CREATE TABLE artists (
@@ -70,7 +70,7 @@ VALUES (1, 'gratuito', 0),
 (3, 'familiar', 7.99),
 (4, 'universitário', 5.99);
 
-INSERT INTO users (user_id, user_name, years_old, contracted_type)
+INSERT INTO users (user_id, user_name, years_old, plan_id)
 VALUES (1, 'Thati', 23, 1),
 (2, 'Cintia', 35, 3),
 (3, 'Bill', 20, 4),
@@ -82,7 +82,7 @@ VALUES (1, 'Thati', 23, 1),
 (9, 'Angelina', 42, 3),
 (10, 'Paul', 46, 3);
 
-INSERT INTO contracted_plan_history (contracted_id, contracted_type, user_id, signature_date)
+INSERT INTO contracted_plan_history (contracted_id, plan_id, user_id, signature_date)
 VALUES (1, 1, 1, '2019-10-20'),
 (2, 3, 2, '2017-12-30'),
 (3, 4, 3, '2019-06-05'),
