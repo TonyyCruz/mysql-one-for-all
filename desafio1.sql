@@ -43,7 +43,7 @@ CREATE TABLE albums (
   album_id INT PRIMARY KEY AUTO_INCREMENT,
   album_name VARCHAR(100) NOT NULL,
   artist_id INT NOT NULL,
-  creation_date INT NOT NULL, -- <=============================
+  creation_date INT NOT NULL,
   FOREIGN KEY (artist_id) REFERENCES artists (artist_id)
 );
 
