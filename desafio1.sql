@@ -52,7 +52,7 @@ CREATE TABLE songs (
   song_name VARCHAR(100) NOT NULL,
   duration INT NOT NULL,
   album_id INT,
-  FOREIGN KEY (album_id) REFERENCES albums (album_id),
+  FOREIGN KEY (album_id) REFERENCES albums (album_id)
 );
 
 CREATE TABLE playback_history (
