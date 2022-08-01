@@ -34,7 +34,7 @@ CREATE TABLE following_artist (
   follow_id INT PRIMARY KEY AUTO_INCREMENT,
   user_id INT NOT NULL,
   artist_id INT NOT NULL,
-  is_following TINYINT NOT NULL DEFAULT 1,
+  -- is_following TINYINT NOT NULL DEFAULT 1,
   FOREIGN KEY (user_id) REFERENCES users (user_id),
   FOREIGN KEY (artist_id) REFERENCES artists (artist_id)
 );
@@ -51,14 +51,15 @@ CREATE TABLE songs (
   song_id INT PRIMARY KEY AUTO_INCREMENT,
   song_name VARCHAR(100) NOT NULL,
   duration INT NOT NULL,
-  album_id INT
+  album_id INT,
+  FOREIGN KEY (album_id) REFERENCES albums (album_id),
 );
 
 CREATE TABLE playback_history (
   history_id INT PRIMARY KEY AUTO_INCREMENT,
   song_id INT NOT NULL,
   user_id INT NOT NULL,
-  reproduction_date DATETIME,
+  reproduction_date TIMESTAMP NOT NULL,
 
   FOREIGN KEY (song_id) REFERENCES songs (song_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id)
@@ -102,29 +103,29 @@ VALUES (1, 'Walter Phoenix'),
 (5, 'Tyler Isle'),
 (6, 'Fog');
 
-INSERT INTO following_artist (follow_id, user_id, artist_id, is_following)
-VALUES (1, 1, 1, 1),
-(2, 1, 4, 1),
-(3, 1, 3, 1),
-(4, 2, 1, 1),
-(5, 2, 3, 1),
-(6, 3, 2, 1),
-(7, 3, 1, 1),
-(8, 4, 4, 1),
-(9, 5, 5, 1),
-(10, 5, 6, 1),
-(11, 6, 6, 1),
-(12, 6, 3, 1),
-(13, 6, 1, 1),
-(14, 7, 2, 1),
-(15, 7, 5, 1),
-(16, 8, 1, 1),
-(17, 8, 5, 1),
-(18, 9, 6, 1),
-(19, 9, 4, 1),
-(20, 9, 3, 1),
-(21, 10, 2, 1),
-(22, 10, 6, 1);
+INSERT INTO following_artist (follow_id, user_id, artist_id)
+VALUES (1, 1, 1),
+(2, 1, 4),
+(3, 1, 3),
+(4, 2, 1),
+(5, 2, 3),
+(6, 3, 2),
+(7, 3, 1),
+(8, 4, 4),
+(9, 5, 5),
+(10, 5, 6),
+(11, 6, 6),
+(12, 6, 3),
+(13, 6, 1),
+(14, 7, 2),
+(15, 7, 5),
+(16, 8, 1),
+(17, 8, 5),
+(18, 9, 6),
+(19, 9, 4),
+(20, 9, 3),
+(21, 10, 2),
+(22, 10, 6);
 
 INSERT INTO albums (album_id, album_name, artist_id, creation_date)
 VALUES (1, 'Envious', 1, 1990),
